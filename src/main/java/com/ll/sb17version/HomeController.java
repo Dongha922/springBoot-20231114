@@ -3,6 +3,7 @@ package com.ll.sb17version;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -194,6 +195,23 @@ public class HomeController {
                 </div>
                 """.formatted(subject, content);
         return html;
+    }
+
+    @GetMapping("/calc20")
+    //@ResponseBody
+    //html 연동시키기위해서 지움.
+    //타임리프 디펜더시 다운하기.
+    String showCalc20(){
+        //디렉토리 압축되어있음.
+        return "calc20";
+    }
+    @GetMapping("/calc21")
+    //Model 은 url 뒤에 값 유무에도 같음.
+    String showCalc21(Model model){
+        model.addAttribute("v1", "안녕");
+        model.addAttribute("v2", "반가워");
+
+        return "calc21";
     }
     @AllArgsConstructor
     class Person{
