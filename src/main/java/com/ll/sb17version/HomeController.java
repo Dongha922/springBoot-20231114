@@ -1,11 +1,14 @@
 package com.ll.sb17version;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -89,6 +92,8 @@ public class HomeController {
         return new Person2(name, age);
     }
 
+    //Object 는 string 과 integer 다 들어감.
+    //외우기
     @GetMapping("/calc10")
     @ResponseBody
     Map<String, Object> showCalc10(
@@ -102,7 +107,36 @@ public class HomeController {
 
     }
 
+    @GetMapping("/calc11")
+    @ResponseBody
+    List<Integer> showCalc11(
+    ){
+        List<Integer> nums = new ArrayList<>(){{
+            add(10);
+            add(-510);
+            add(393);
 
+
+        }};
+        return nums;
+
+    }
+    @GetMapping("/calc12")
+    @ResponseBody
+    int[] showCalc12(){
+        int [] nums_array= new int[]{10,294,304};
+        return nums_array;
+    }
+    @GetMapping("/calc13")
+    @ResponseBody
+    List<Person2> showCalc13(String name, int age){
+        List<Person2> persons = new ArrayList<>(){{
+           add(new Person2(name, age));
+           add(new Person2(name + "!", age +1));
+
+        }};
+        return persons;
+    }
     @AllArgsConstructor
     class Person{
         public String name;
@@ -111,8 +145,10 @@ public class HomeController {
 
     @AllArgsConstructor
     class Person2{
-        public String name;
-        public int age;
+        @Getter
+        private String name;
+        @Getter
+        private int age;
     }
     int num =0;
     @GetMapping("/calc22")
