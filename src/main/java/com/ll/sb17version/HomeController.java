@@ -213,6 +213,15 @@ public class HomeController {
 
         return "calc21";
     }
+///문제 : 새로고침 횟수
+    ///정답: 이전 숫자를 기억해야함. => 지역변수가 아닌 인스턴스변수처리
+    int num =0;
+    @GetMapping("/calc22")
+    @ResponseBody
+    int showCalc22(){
+        num++;
+        return num;
+    }
     @AllArgsConstructor
     class Person{
         public String name;
@@ -227,13 +236,5 @@ public class HomeController {
         private int age;
     }
 
-    int num =0;
-    @GetMapping("/calc22")
-    @ResponseBody
-    int showCalc22(
-            @RequestParam(defaultValue = "0") int num
-    ){
-       num++;
-       return num;
-    }
+
 }
