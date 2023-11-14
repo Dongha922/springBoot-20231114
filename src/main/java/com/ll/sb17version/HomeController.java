@@ -36,6 +36,7 @@ public class HomeController {
         return "a: " + a + ", b: " + b ;
     }
 
+    ///@requestParam 은 널값을 넣어주기위한
     @GetMapping("/calc3")
     @ResponseBody //이 함수의 리턴값을 그대로 브라우저에 출력하라는 의미
     String showCalc3(
@@ -137,6 +138,63 @@ public class HomeController {
         }};
         return persons;
     }
+
+    @GetMapping("/calc14")
+    @ResponseBody
+    String showCalc14(){
+        String html = "";
+        html += "<div>";
+        html += "<input type = \"text\" placeholder = \"내용 \">";
+        html += "</div>";
+
+
+        return html;
+
+    }
+
+    @GetMapping("/calc15")
+    @ResponseBody
+    String showCalc15() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<div>");
+        sb.append("<input type=\"text\" placeholder=\"내용\">");
+        sb.append("</div>");
+
+        return sb.toString();
+    }
+    @GetMapping("/calc16")
+    @ResponseBody
+    String showCalc16() {
+        String html = "<div><input type=\\\"text\\\" placeholder=\\\"내용\\\"></div>";
+        return html;
+    }
+    @GetMapping("/calc17")
+    @ResponseBody
+    String showCalc17() {
+        String html = """
+                <div>
+                    <input type="text" placeholder="내용">
+                """;
+        return html;
+    }
+
+    //긴응답이라서 html 코드가 길어지면 불리함.
+    ///http://localhost:8020/calc18?content=벨루값
+    @GetMapping("/calc18")
+    @ResponseBody
+    String showCalc18( @RequestParam(defaultValue = "")String content,
+                       @RequestParam(defaultValue = "")String subject) {
+        String html = """
+                 <div>
+                    <input type="text" placeholder="제목" value="%s">
+                </div>
+                <div>
+                    <input type="text" placeholder="내용" value="%s">
+                </div>
+                """.formatted(subject, content);
+        return html;
+    }
     @AllArgsConstructor
     class Person{
         public String name;
@@ -150,6 +208,7 @@ public class HomeController {
         @Getter
         private int age;
     }
+
     int num =0;
     @GetMapping("/calc22")
     @ResponseBody
